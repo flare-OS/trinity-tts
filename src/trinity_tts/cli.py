@@ -3,9 +3,22 @@
 from __future__ import annotations
 
 import argparse
+import sys
+from pathlib import Path
 
-from .config import PROFILES
-from .synthesizer import Synthesizer
+if __package__ in {None, ""}:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from trinity_tts.config import PROFILES
+    from trinity_tts.synthesizer import Synthesizer
+else:
+    from .config import PROFILES
+    from .synthesizer import Synthesizer
+
+# Compatibility for the common-but-invalid `python -m cli.py` invocation from
+# inside this directory: runpy imports `cli` first and then searches for a
+# `py` submodule, so exposing this file as a package lets `py.py` handle it.
+if __name__ == "cli":
+    __path__ = [str(Path(__file__).resolve().parent)]
 
 
 def build_parser() -> argparse.ArgumentParser:

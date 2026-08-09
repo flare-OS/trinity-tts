@@ -16,6 +16,14 @@ The initial implementation includes:
 python -m trinity_tts.cli "Hello from Trinity TTS" --output hello.wav
 ```
 
+If you are already inside `src/trinity_tts`, these local development forms also work:
+
+```bash
+python -m cli "Hello from Trinity TTS" --output hello.wav
+python -m cli.py "Hello from Trinity TTS" --output hello.wav
+python cli.py "Hello from Trinity TTS" --output hello.wav
+```
+
 For training experiments, install the optional PyTorch dependency:
 
 ```bash
